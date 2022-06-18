@@ -14,27 +14,26 @@ import java.util.List;
  * @author Edwin
  */
 public class daoVentas {
-     private static final String SQL_SELECT = "SELECT cuentapagarid, conid, cuentasaldo, cuentavalor, cuentareferencia, comid, provid, cuentafechaemi, cuentafechavenci FROM ventas_detalle";
-    private static final String SQL_INSERT = "INSERT INTO ventas_detalle ( conid, cuentasaldo, cuentavalor, cuentareferencia, comid, provid, cuentafechaemi, cuentafechavenci) VALUES ( ?,?,?,?,?,?,?,?);";
-    private static final String SQL_UPDATE = "UPDATE ventas_detalle SET conid = ?, cuentasaldo = ?, cuentavalor = ?, cuentareferencia = ?, comid = ?, provid = ?, cuentafechaemi = ?, cuentafechavenci = ?  WHERE ventas_detalle.cuentapagarid = ?";
-    private static final String SQL_DELETE = "DELETE FROM ventas_detalle WHERE ventas_detalle.cuentapagarid = ?";
-    private static final String SQL_QUERY = "SELECT cuentapagarid, conid, cuentasaldo, cuentavalor, cuentareferencia, comid, provid, cuentafechaemi, cuentafechavenci FROM ventas_detalle  WHERE ventas_detalle.cuentapagarid = ?";
+     private static final String SQL_SELECT = "SELECT codproducto, cantidadventas, costoventa, precioventa FROM ventas_detalle";
+    private static final String SQL_INSERT = "INSERT INTO ventas_detalle ( cantidadventas, costoventa, precioventa) VALUES ( ?,?,?,?);";
+    private static final String SQL_UPDATE = "UPDATE ventas_detalle SET cantidadventas = ?, costoventa = ?, precioventa = ?, cuentareferencia = ?, comid = ?, provid = ?, cuentafechaemi = ?, cuentafechavenci = ?  WHERE ventas_detalle = ?";
+    private static final String SQL_DELETE = "DELETE FROM ventas_detalle WHERE ventas_detalle = ?";
+    private static final String SQL_QUERY = "SELECT cantidadventas, costoventa, precioventa FROM ventas_detalle  WHERE ventas_detalle = ?";
 
     public List<clsVentas> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        clsVentas cuentas = null;
+        clsVentas ventas = null;
         List<clsVentas> cuent = new ArrayList<clsVentas>();
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int cuentapagarid = rs.getInt("cuentapagarid");
-                int conid = rs.getInt("conid");
-                int cuentasaldo = rs.getInt("cuentasaldo");
-                int cuentavalor = rs.getInt("cuentavalor");
+                int cantidadventas = rs.getInt("cantidadventas");
+                int costoventa = rs.getInt("costoventa");
+                int precioventa = rs.getInt("precioventa");
                 int cuentareferencia = rs.getInt("cuentareferencia");
                 int comid = rs.getInt("comid");
                 int Provid = rs.getInt("provid");
@@ -42,18 +41,12 @@ public class daoVentas {
                 String cuentafechavenci = rs.getString("cuentafechavenci");
                 System.out.println(cuentafechavenci);
                 
-                cuentas = new clsVentas();
-                cuentas.setCuentapagarid(cuentapagarid);
-                cuentas.setConid(conid);
-                cuentas.setCuentasaldo(cuentasaldo);
-                cuentas.setCuentavalor(cuentavalor);
-                cuentas.setCuentareferencia(cuentareferencia);
-                cuentas.setComid(comid);
-                cuentas.setProvid(Provid);
-                cuentas.setCuentafechaemi(cuentafechaemi);
-                cuentas.setCuentafechavenci(cuentafechavenci);
+                ventas = new clsVentas();
+                ventas.setCantidadventa(cantidadventas);
+                ventas.setCostoventa(costoventa);
+                ventas.setPrecioventa(precioventa);
                 
-                cuent.add(cuentas);
+                cuent.add(ventas);
             }
 
         } catch (SQLException ex) {
@@ -67,21 +60,16 @@ public class daoVentas {
         return cuent;
     }
 
-    public int insert(clsVentas cuentas) {
+    public int insert(clsVentas ventas) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setInt(1, cuentas.getConid());
-            stmt.setInt(2, cuentas.getCuentasaldo());
-            stmt.setInt(3, cuentas.getCuentavalor());
-            stmt.setInt(4, cuentas.getCuentareferencia());
-            stmt.setInt(5, cuentas.getComid());
-            stmt.setInt(6, cuentas.getProvid());
-            stmt.setString(7, cuentas.getCuentafechaemi());
-            stmt.setString(8, cuentas.getCuentafechavenci());
+            stmt.setInt(1, ventas.getCantidadventa());
+            stmt.setInt(2, ventas.getCostoventa());
+            stmt.setInt(3, ventas.getPrecioventa());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -97,7 +85,7 @@ public class daoVentas {
     }
 
 
-    public int update(clsVentas cuentas) {
+    public int update(clsVentas ventas) {
        Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -105,15 +93,9 @@ public class daoVentas {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setInt(1, cuentas.getConid());
-            stmt.setInt(2, cuentas.getCuentasaldo());
-            stmt.setInt(3, cuentas.getCuentavalor());
-            stmt.setInt(4, cuentas.getCuentareferencia());
-            stmt.setInt(5, cuentas.getComid());  
-            stmt.setInt(6, cuentas.getProvid());
-            stmt.setString(7, cuentas.getCuentafechaemi());
-            stmt.setString(8, cuentas.getCuentafechavenci());
-            stmt.setInt(9, cuentas.getCuentapagarid());
+            stmt.setInt(1, ventas.getCantidadventa());
+            stmt.setInt(2, ventas.getCostoventa());
+            stmt.setInt(3, ventas.getPrecioventa());
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -127,7 +109,7 @@ public class daoVentas {
         return rows;
     }
 
-    public int delete(clsVentas cuentas) {
+    public int delete(clsVentas ventas) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -136,7 +118,6 @@ public class daoVentas {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, cuentas.getCuentapagarid());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -149,7 +130,7 @@ public class daoVentas {
         return rows;
     }
 
-    public clsVentas query(clsVentas cuentas) {
+    public clsVentas query(clsVentas ventas) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -157,30 +138,23 @@ public class daoVentas {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, cuentas.getCuentapagarid());
              
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int cuentapagarid = rs.getInt("cuentapagarid");
-                int conid = rs.getInt("conid");
-                int cuentasaldo = rs.getInt("cuentasaldo");
-                int cuentavalor = rs.getInt("cuentavalor");
+                int cantidadventas = rs.getInt("cantidadventas");
+                int costoventa = rs.getInt("costoventa");
+                int precioventa = rs.getInt("precioventa");
                 int cuentareferencia = rs.getInt("cuentareferencia");
                 int comid = rs.getInt ("comid");
                 int provid = rs.getInt("provid");
                 String cuentafechaemi = rs.getString("cuentafechaemi");
                 String cuentafechavenci = rs.getString("cuentafechavenci");
 
-                cuentas = new clsVentas();
-                cuentas.setCuentapagarid(cuentapagarid);
-                cuentas.setConid(conid);
-                cuentas.setCuentasaldo(cuentasaldo);
-                cuentas.setCuentavalor(cuentavalor);
-                cuentas.setCuentareferencia(cuentareferencia);
-                cuentas.setComid(comid);
-                cuentas.setProvid(provid);
-                cuentas.setCuentafechaemi(cuentafechaemi);
-                cuentas.setCuentafechavenci(cuentafechavenci);
+                ventas = new clsVentas();
+                ventas.setCantidadventa(cantidadventas);
+                ventas.setCostoventa(costoventa);
+                ventas.setPrecioventa(precioventa);
+                
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {
@@ -192,7 +166,7 @@ public class daoVentas {
         }
 
         //return personas;  // Si se utiliza un ArrayList
-        return cuentas;
+        return ventas;
     }
     
 }

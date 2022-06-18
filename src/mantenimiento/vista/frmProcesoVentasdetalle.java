@@ -4,11 +4,18 @@
  */
 package mantenimiento.vista;
 
+import inicio.controlador.clsVentas;
+import java.io.File;
+import mantenimiento.modelo.daoVentas;
+
 /**
  *
  * @author Edwin
  */
 public class frmProcesoVentasdetalle extends javax.swing.JFrame {
+
+    private Object ventasDAO;
+ 
 
     /**
      * Creates new form frmProcesoVentasdetalle
@@ -46,10 +53,6 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
         CbxProveedor = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVendedores = new javax.swing.JTable();
-        jcVenci = new com.toedter.calendar.JDateChooser();
-        jLabel3 = new javax.swing.JLabel();
-        jcEmi = new com.toedter.calendar.JDateChooser();
-        jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -200,16 +203,6 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaVendedores);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 670, 480));
-        getContentPane().add(jcVenci, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 150, -1));
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        jLabel3.setText("Vencimiento");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
-        getContentPane().add(jcEmi, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 150, -1));
-
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        jLabel2.setText("Emision");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
 
         jButton2.setText("Ayuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -224,23 +217,19 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        daoCuentasPorPagar cuentasDAO = new daoCuentasPorPagar();
-        clsCuentasPorPagar cuentasporpagarAEliminar = new clsCuentasPorPagar();
-        cuentasporpagarAEliminar.setCuentapagarid(Integer.parseInt(txtbuscado.getText()));
-        cuentasDAO.delete(cuentasporpagarAEliminar);
+        daoVentas ventasDAO = new daoVentas();
+        clsVentas cuentasporpagarAEliminar = new clsVentas();
+        cuentasporpagarAEliminar.setCodproducto(Integer.parseInt(txtbuscado.getText()));
+        ventasDAO.delete(cuentasporpagarAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
 
-        lblConcepto.setText("");
-        lblCompras.setText("");
-        lblProveedor.setText("");
+    
         txtCuentSal.setText("");
         txtCuentVal.setText("");
         txtCuentRef.setText("");
-        lblEmi.setText("");
-        lblVenci.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -250,61 +239,21 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         //        // TODO add your handling code here:
-        daoCuentasPorPagar cuentasDAO = new daoCuentasPorPagar();
-        clsCuentasPorPagar cuentasporpagarAActualizar = new clsCuentasPorPagar();
-        cuentasporpagarAActualizar.setCuentapagarid(Integer.parseInt(txtbuscado.getText()));
-        cuentasporpagarAActualizar.setConid(Integer.parseInt(String.valueOf(CbxConcepto.getSelectedItem())));
-        cuentasporpagarAActualizar.setProvid(Integer.parseInt(String.valueOf(CbxProveedor.getSelectedItem())));
-        cuentasporpagarAActualizar.setComid(Integer.parseInt(String.valueOf(CbxCompras.getSelectedItem())));
-        cuentasporpagarAActualizar.setCuentasaldo(Integer.parseInt(txtCuentSal.getText()));
-        cuentasporpagarAActualizar.setCuentavalor(Integer.parseInt(txtCuentVal.getText()));
-        cuentasporpagarAActualizar.setCuentareferencia(Integer.parseInt(txtCuentRef.getText()));
-
-        String dia = Integer.toString(jcEmi.getCalendar().get(Calendar.DAY_OF_MONTH));
-        String mes = Integer.toString(jcEmi.getCalendar().get(Calendar.MONTH) + 1);
-        String year = Integer.toString(jcEmi.getCalendar().get(Calendar.YEAR));
-        String fecha = (year + "-" + mes + "-" + dia);
-        cuentasporpagarAActualizar.setCuentafechaemi(fecha);
-
-        String dia1 = Integer.toString(jcVenci.getCalendar().get(Calendar.DAY_OF_MONTH));
-        String mes1 = Integer.toString(jcVenci.getCalendar().get(Calendar.MONTH) + 1);
-        String year1 = Integer.toString(jcVenci.getCalendar().get(Calendar.YEAR));
-        String fecha1 = (year1 + "-" + mes1 + "-" + dia1);
-        cuentasporpagarAActualizar.setCuentafechavenci(fecha1);
-
-        cuentasDAO.update(cuentasporpagarAActualizar);
-        llenadoDeTablas();
+        daoVentas ventasDAO = new daoVentas();
+        clsVentas cuentasporpagarAActualizar = new clsVentas();
+        cuentasporpagarAActualizar.setCodproducto(Integer.parseInt(txtbuscado.getText()));
+        cuentasporpagarAActualizar.setCantidadventa(Integer.parseInt(String.valueOf(CbxConcepto.getSelectedItem())));
+        cuentasporpagarAActualizar.setCostoventa(Integer.parseInt(String.valueOf(CbxProveedor.getSelectedItem())));
+        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        daoCuentasPorPagar cuentasDAO = new daoCuentasPorPagar();
-        clsCuentasPorPagar cuentasporpagarAInsertar = new clsCuentasPorPagar();
-        cuentasporpagarAInsertar.setConid(Integer.parseInt(String.valueOf(CbxConcepto.getSelectedItem())));
-        cuentasporpagarAInsertar.setProvid(Integer.parseInt(String.valueOf(CbxProveedor.getSelectedItem())));
-        cuentasporpagarAInsertar.setComid(Integer.parseInt(String.valueOf(CbxCompras.getSelectedItem())));
-        cuentasporpagarAInsertar.setCuentasaldo(Integer.parseInt(txtCuentSal.getText()));
-        cuentasporpagarAInsertar.setCuentavalor(Integer.parseInt(txtCuentVal.getText()));
-        cuentasporpagarAInsertar.setCuentareferencia(Integer.parseInt(txtCuentRef.getText()));
-
-        String dia = Integer.toString(jcEmi.getCalendar().get(Calendar.DAY_OF_MONTH));
-        String mes = Integer.toString(jcEmi.getCalendar().get(Calendar.MONTH) + 1);
-        String year = Integer.toString(jcEmi.getCalendar().get(Calendar.YEAR));
-        String fecha = (year + "-" + mes + "-" + dia);
-        cuentasporpagarAInsertar.setCuentafechaemi(fecha);
-
-        String dia1 = Integer.toString(jcVenci.getCalendar().get(Calendar.DAY_OF_MONTH));
-        String mes1 = Integer.toString(jcVenci.getCalendar().get(Calendar.MONTH) + 1);
-        String year1 = Integer.toString(jcVenci.getCalendar().get(Calendar.YEAR));
-        String fecha1 = (year1 + "-" + mes1 + "-" + dia1);
-        cuentasporpagarAInsertar.setCuentafechavenci(fecha1);
-
-        cuentasDAO.insert(cuentasporpagarAInsertar);
-        llenadoDeTablas();
+     
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "INGRESE EL CODIGO DEL PROVEEDOR QUE DESEA BUSCAR,ELIMINAR O REGISTRAR");
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtbuscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscadoActionPerformed
@@ -313,7 +262,7 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         // TODO add your handling code here:
-        buscarCuenta();
+        
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void txtCuentRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuentRefActionPerformed
@@ -399,11 +348,7 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser jcEmi;
-    private com.toedter.calendar.JDateChooser jcVenci;
     private javax.swing.JLabel label10;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label5;
@@ -415,4 +360,8 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
     private javax.swing.JTextField txtCuentVal;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
+
+    private void llenadoDeTablas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
