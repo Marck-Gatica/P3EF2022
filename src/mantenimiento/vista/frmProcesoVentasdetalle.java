@@ -143,11 +143,11 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
         getContentPane().add(txtCuentSal, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 140, 20));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        label9.setText("Saldo de cuenta");
+        label9.setText("Costo venta");
         getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel1.setText("ID de Concepto");
+        jLabel1.setText("Codigo Bodega");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, 30));
 
         CbxConcepto.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +158,7 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
         getContentPane().add(CbxConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 180, 30));
 
         label10.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        label10.setText("Valor de la cuenta");
+        label10.setText("Cantidad venta");
         getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 160, 30));
 
         txtCuentVal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -171,7 +171,7 @@ public class frmProcesoVentasdetalle extends javax.swing.JFrame {
         getContentPane().add(txtCuentVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 140, 20));
 
         label7.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        label7.setText("ID de proveedor");
+        label7.setText("Codigo Producto");
         getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 30));
 
         CbxProveedor.addActionListener(new java.awt.event.ActionListener() {
