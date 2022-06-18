@@ -42,8 +42,6 @@ public class mdiGeneral extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jM_MantenimientopApps = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -75,7 +73,7 @@ public class mdiGeneral extends javax.swing.JFrame {
 
         jMenu4.setText("Catalogos");
 
-        jMenuItem3.setText("Mantenimiento Usuarios");
+        jMenuItem3.setText("Mantenimiento Productos");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -83,27 +81,11 @@ public class mdiGeneral extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem3);
 
-        jMenuItem5.setText("Mantenimiento Aplicacion");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem5);
-
-        jMenuItem6.setText("Mantenimiento Perfil");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem6);
-
         jMenuBar1.add(jMenu4);
 
         jM_MantenimientopApps.setText("Procesos");
 
-        jMenuItem4.setText("Mantenimiento Perfil de Aplicacion");
+        jMenuItem4.setText("Proceso Venta");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -150,26 +132,6 @@ public class mdiGeneral extends javax.swing.JFrame {
         //Dimension FrameSize = ventana2.getSize();
         //ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2); 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-        //frmMantenimientoAplicaciones ventana = new frmMantenimientoAplicaciones();
-        //jDesktopPane1.add(ventana);
-        //Dimension desktopSize = jDesktopPane1.getSize();
-        //Dimension FrameSize = ventana.getSize();
-        //ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);    
-        
-        
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
-        //frmMantenimientoPerfiles ventana = new frmMantenimientoPerfiles();
-        //jDesktopPane1.add(ventana);
-        //Dimension desktopSize = jDesktopPane1.getSize();
-        //Dimension FrameSize = ventana.getSize();
-        //ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);            
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,7 +213,5 @@ public class mdiGeneral extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }

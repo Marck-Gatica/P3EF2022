@@ -4,8 +4,8 @@
  */
 package inicio.vista;
 
-import inicio.controlador.daoUsuario;
-import inicio.inicio.clsUsuario;
+import mantenimiento.modelo.daoUsuario;
+import inicio.controlador.clsUsuario;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
