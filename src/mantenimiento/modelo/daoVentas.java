@@ -1,5 +1,7 @@
 package mantenimiento.modelo;
 
+import inicio.controlador.clsConexion;
+import inicio.controlador.clsVentas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,12 +20,12 @@ public class daoVentas {
     private static final String SQL_DELETE = "DELETE FROM ventas_detalle WHERE ventas_detalle.cuentapagarid = ?";
     private static final String SQL_QUERY = "SELECT cuentapagarid, conid, cuentasaldo, cuentavalor, cuentareferencia, comid, provid, cuentafechaemi, cuentafechavenci FROM ventas_detalle  WHERE ventas_detalle.cuentapagarid = ?";
 
-    public List<clsCuentasPorPagar> select() {
+    public List<clsVentas> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        clsCuentasPorPagar cuentas = null;
-        List<clsCuentasPorPagar> cuent = new ArrayList<clsCuentasPorPagar>();
+        clsVentas cuentas = null;
+        List<clsVentas> cuent = new ArrayList<clsVentas>();
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
@@ -40,7 +42,7 @@ public class daoVentas {
                 String cuentafechavenci = rs.getString("cuentafechavenci");
                 System.out.println(cuentafechavenci);
                 
-                cuentas = new clsCuentasPorPagar();
+                cuentas = new clsVentas();
                 cuentas.setCuentapagarid(cuentapagarid);
                 cuentas.setConid(conid);
                 cuentas.setCuentasaldo(cuentasaldo);
@@ -65,7 +67,7 @@ public class daoVentas {
         return cuent;
     }
 
-    public int insert(clsCuentasPorPagar cuentas) {
+    public int insert(clsVentas cuentas) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -95,7 +97,7 @@ public class daoVentas {
     }
 
 
-    public int update(clsCuentasPorPagar cuentas) {
+    public int update(clsVentas cuentas) {
        Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -125,7 +127,7 @@ public class daoVentas {
         return rows;
     }
 
-    public int delete(clsCuentasPorPagar cuentas) {
+    public int delete(clsVentas cuentas) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -147,7 +149,7 @@ public class daoVentas {
         return rows;
     }
 
-    public clsCuentasPorPagar query(clsCuentasPorPagar cuentas) {
+    public clsVentas query(clsVentas cuentas) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -169,7 +171,7 @@ public class daoVentas {
                 String cuentafechaemi = rs.getString("cuentafechaemi");
                 String cuentafechavenci = rs.getString("cuentafechavenci");
 
-                cuentas = new clsCuentasPorPagar();
+                cuentas = new clsVentas();
                 cuentas.setCuentapagarid(cuentapagarid);
                 cuentas.setConid(conid);
                 cuentas.setCuentasaldo(cuentasaldo);

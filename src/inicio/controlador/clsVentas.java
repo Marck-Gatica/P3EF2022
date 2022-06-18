@@ -5,8 +5,7 @@ package inicio.controlador;
  *
  * @author Edwin
  */
-public class clsVentas {
-    private int cuentapagarid;   
+public class clsVentas { 
  private int conid; 
  private int comid;
  private int provid;
@@ -19,8 +18,8 @@ public class clsVentas {
 public clsVentas() {
 }
 
-    public clsVentas (int cuentapagarid, int conid, int comid, int provid, int cuentadoc, int cuentasaldo, int cuentavalor, int cuentareferencia, String cuentafechaemi, String cuentafechavenci) {
-        this.cuentapagarid = cuentapagarid;
+    public clsVentas (int conid, int comid, int provid, int cuentadoc, int cuentasaldo, int cuentavalor, int cuentareferencia, String cuentafechaemi, String cuentafechavenci) {
+        
         this.conid = conid;
         this.comid = comid;
         this.provid = provid;
@@ -29,14 +28,6 @@ public clsVentas() {
         this.cuentareferencia = cuentareferencia;
         this.cuentafechaemi = cuentafechaemi;
         this.cuentafechavenci = cuentafechavenci;   
-    }
-
-    public int getCuentapagarid() {
-        return cuentapagarid;
-    }
-
-    public void setCuentapagarid(int cuentapagarid) {
-        this.cuentapagarid = cuentapagarid;
     }
     
     public int getConid() {
@@ -106,6 +97,6 @@ public clsVentas() {
     
     @Override
     public String toString() {
-        return "clsCuentasPorPagar{" + "cuentapagarid=" + cuentapagarid + ", conid=" + conid + ", comid=" + comid + ", provid=" + provid + ", cuentasaldo=" + cuentasaldo + ", cuentavalor=" + cuentavalor + ", cuentareferencia=" + cuentareferencia + ", cuentafechaemi=" + cuentafechaemi + ", cuentafechavenci=" + cuentafechavenci + '}';
+        return "clsCuentasPorPagar{" + ", conid=" + conid + ", comid=" + comid + ", provid=" + provid + ", cuentasaldo=" + cuentasaldo + ", cuentavalor=" + cuentavalor + ", cuentareferencia=" + cuentareferencia + ", cuentafechaemi=" + cuentafechaemi + ", cuentafechavenci=" + cuentafechavenci + '}';
     }
 }
