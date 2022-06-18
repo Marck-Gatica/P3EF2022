@@ -1,12 +1,13 @@
-package inicio.controlador;
+package mantenimiento.modelo;
 
+import inicio.controlador.clsConexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import inicio.inicio.clsUsuario;
+import inicio.controlador.clsUsuario;
 
 /**
  *

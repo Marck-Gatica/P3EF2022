@@ -1,4 +1,4 @@
-package inicio.inicio;
+package inicio.controlador;
 
 /**
  *
